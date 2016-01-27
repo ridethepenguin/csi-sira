@@ -1,3 +1,5 @@
+var DefinePlugin = require("webpack/lib/DefinePlugin");
+
 module.exports = function karmaConfig(config) {
     config.set({
 
@@ -9,7 +11,7 @@ module.exports = function karmaConfig(config) {
 
         files: [
             'tests.webpack.js',
-            { pattern: './web/client/test-resources/**/*', included: false }
+            { pattern: './js/test-resources/**/*', included: false }
         ],
 
         preprocessors: {
@@ -19,7 +21,7 @@ module.exports = function karmaConfig(config) {
         reporters: [ 'mocha', 'coverage', 'coveralls' ],
 
         junitReporter: {
-            outputDir: './web/target/karma-tests-results',
+            outputDir: './js/target/karma-tests-results',
             suite: ''
         },
 
@@ -36,6 +38,11 @@ module.exports = function karmaConfig(config) {
         },
 
         webpack: {
+            plugins: [
+              new DefinePlugin({
+                  "__DEVTOOLS__": true
+              })
+            ],
             devtool: 'inline-source-map',
             module: {
                 loaders: [

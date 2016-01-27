@@ -1,3 +1,5 @@
+var DefinePlugin = require("webpack/lib/DefinePlugin");
+
 module.exports = function karmaConfig(config) {
     config.set({
 
@@ -36,6 +38,11 @@ module.exports = function karmaConfig(config) {
         },
 
         webpack: {
+            plugins: [
+              new DefinePlugin({
+                  "__DEVTOOLS__": true
+              })
+            ],
             devtool: 'inline-source-map',
             module: {
                 loaders: [
